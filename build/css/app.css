@@ -1,0 +1,148 @@
+:root {
+    /* Colors */
+    --primary-color: #B0CDE6;
+    --primary-color-dark: #3A3960;
+    --secondary-color: #A290B7;
+    --light-color: #FDF4D2;
+    --dark-color: #946D6D;
+    /* Sizes */
+    --border-radius: .8rem;
+    --gap-normal: 1.2rem;
+    --gap-medium: 3rem;
+    --gap-large: 4rem;
+    /* Font */
+    --calculator-font-size: 3rem;
+    --heavy-font-weight: 800;
+    --normal-font-weight: 500;
+    --thin-font-weight: 300;
+}
+
+@media (min-width: 768px) {
+    :root {
+        --gap-normal: 2rem;
+    }
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 1.6rem;
+    font-family: 'Consolas', monospace, serif;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-normal);
+    padding: var(--gap-normal);
+}
+
+header h1,
+footer p {
+    text-align: center;
+}
+
+main {
+    flex: 1;
+    width: 100%;
+}
+
+.calculator {
+    border: .1rem solid var(--primary-color);
+    border-radius: var(--border-radius);
+
+    max-width: 50rem;
+    padding: var(--gap-normal);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-normal);
+}
+
+.input_text-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-normal);
+}
+
+.calculator-input:first-child:focus {
+    border: .1rem solid var(--primary-color-dark);
+}
+
+.calculator-input:last-child {
+    border: none;
+    background-color: var(--primary-color);
+}
+
+.input_button-container {
+    display: flex;
+    justify-content: space-around;
+    gap: var(--gap-normal);
+}
+
+.numbers-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--gap-normal);
+}
+
+.numbers-container .calculator-button:nth-last-child(-n+2) {
+    grid-column: span 2;
+    font-size: 2rem;
+}
+
+@media (min-width: 768px) {
+    .numbers-container .calculator-button:nth-last-child(-n+2) {
+        font-size: 3rem;
+    }
+}
+
+.operations-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-normal);
+}
+
+/* Clases de Utilidades */
+
+.calculator-button {
+    border: .1rem solid var(--primary-color);
+    border-radius: var(--border-radius);
+    background-color: unset;
+    font-size: var(--calculator-font-size);
+    font-weight: var(--heavy-font-weight);
+    cursor: pointer;
+    transition: background-color .1s ease-in-out, transform .1s ease-in-out;
+
+    display: block;
+    padding: var(--gap-normal);
+    height: fit-content;
+}
+
+.calculator-input {
+    padding: var(--gap-normal);
+    font-size: var(--calculator-font-size);
+    font-weight: var(--heavy-font-weight);
+    border: .1rem solid var(--primary-color);
+    /* Usar estas propiedades para corregir el ancho mínimo de elementos hijos de un display 'flex' o 'grid' */
+    width: 100%;
+    min-width: 0;
+}
+
+/* Animaciones */
+
+.key-active {
+    transform: scale(0.95);
+    background-color: var(--secondary-color);
+}
