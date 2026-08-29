@@ -1,14 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
+    setAtributes();
     loadButtons();
     protectOperatorInput();
     loadKeyEvents();
 })
 
+const mediaQuery = matchMedia('(min-width: 768px)');
 const leftButtons = ['7', '8', '9', '=', '4', '5', '6', '(', '1', '2', '3', ')', '0', '.', '<', '>', 'Borrar', 'Limpiar'];
 const rightButtons = ['+', '-', '*', '/'];
 const allButtons = leftButtons.concat(rightButtons);
 const allowedChars = /^[0-9+\-*/().]+$/;
 const isSymbol = (char) => /^[+\-*/]+$/.test(char);
+
+mediaQuery.addEventListener('change', setAtributes);
+function setAtributes() {
+    const operationInput = document.getElementById('operation-input');
+    mediaQuery.matches
+        ? operationInput.removeAttribute('readonly')
+        : operationInput.setAttribute('readonly', '');
+}
 
 function loadButtons() {
     const numbersContainer = document.querySelector('.numbers-container');
