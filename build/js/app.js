@@ -15,9 +15,24 @@ const isSymbol = (char) => /^[+\-*/]+$/.test(char);
 mediaQuery.addEventListener('change', setAtributes);
 function setAtributes() {
     const operationInput = document.getElementById('operation-input');
-    mediaQuery.matches
-        ? operationInput.removeAttribute('readonly')
-        : operationInput.setAttribute('readonly', '');
+    // mediaQuery.matches
+    //     ? operationInput.removeAttribute('readonly')
+    //     : operationInput.setAttribute('readonly', '');
+
+    if (mediaQuery.matches) {
+        operationInput.removeEventListener('keydown', filterKeys)
+        operationInput.removeAttribute('inputmode');
+    } else {
+        operationInput.addEventListener('keydown', filterKeys);
+        operationInput.setAttribute('inputmode', 'none');
+    }
+}
+
+function filterKeys(e) {
+    const allowedKeys = ['ArrowLeft', 'ArrowRight'];
+    if (!allowedKeys.includes(e.key)) {
+        e.preventDefault();
+    }
 }
 
 function loadButtons() {
@@ -233,7 +248,6 @@ function insertAtCursor(char, input) {
     const text = input.value;
     const frontChar = text.slice(cursorEnd, cursorEnd + 1);
 
-    console.log(`Caracter actual: ${char}\nCaracter delantero: ${frontChar}`);
     if (char === '(' && frontChar !== ')') {
         input.value = text.slice(0, cursorStart) + '()' + text.slice(cursorEnd);
         input.selectionStart = input.selectionEnd = cursorStart + char.length;
@@ -334,7 +348,6 @@ function evaluateOperation(operation) {
     }
 
     const newOperation = operationArray.join('');
-    console.log(`Nueva operación: ${newOperation}\ncharCounter: ${charCounter}`);
 
     const execute = new Function(`return ${newOperation}`);
     return execute();

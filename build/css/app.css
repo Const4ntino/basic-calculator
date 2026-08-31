@@ -76,6 +76,10 @@ main {
     gap: var(--gap-normal);
 }
 
+.calculator-input:first-child {
+    caret-color: #000;
+}
+
 .calculator-input:first-child:focus {
     border: .1rem solid var(--primary-color-dark);
 }
