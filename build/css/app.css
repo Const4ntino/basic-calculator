@@ -39,7 +39,7 @@ html {
 body {
     font-size: 1.6rem;
     font-family: 'Consolas', monospace, serif;
-    min-height: 100vh;
+    min-height: 100dvh;
 
     display: flex;
     flex-direction: column;
@@ -55,6 +55,7 @@ footer p {
 
 main {
     flex: 1;
+    min-height: 0;
     width: 100%;
 }
 
