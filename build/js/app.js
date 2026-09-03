@@ -47,7 +47,7 @@ function loadButtons() {
         const operationInput = document.getElementById('operation-input');
         const resultInput = document.getElementById('result-input');
 
-        calculatorButton.addEventListener('pointerdown', () => {
+        calculatorButton.addEventListener('pointerdown', (e) => {
             calculatorButton.classList.add('key-active');
             if (value === '=') {
                 solve();
@@ -74,17 +74,19 @@ function loadButtons() {
                 return;
             }
             if (isValidInput(value, operationInput)) {
+                e.preventDefault();
                 insertAtCursor(value, operationInput);
+                operationInput.focus();
                 return;
             }
         });
         calculatorButton.addEventListener('pointerup', () => {
             calculatorButton.classList.remove('key-active');
-            operationInput.focus();
+            // operationInput.focus();
         });
         calculatorButton.addEventListener('pointerleave', () => {
             calculatorButton.classList.remove('key-active');
-            operationInput.focus();
+            // operationInput.focus();
         });
     })
 
