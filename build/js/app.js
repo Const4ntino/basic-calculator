@@ -50,43 +50,55 @@ function loadButtons() {
         calculatorButton.addEventListener('pointerdown', (e) => {
             calculatorButton.classList.add('key-active');
             if (value === '=') {
+                e.preventDefault();
                 solve();
+                operationInput.focus();
                 return;
             }
             if (value === 'Borrar') {
+                e.preventDefault();
                 deleteAtCursor(operationInput);
+                operationInput.focus();
                 return;
             }
             if (value === 'Limpiar') {
                 if (operationInput.value !== '') {
+                    e.preventDefault();
                     operationInput.value = '';
+                    operationInput.focus();
                 } else {
+                    e.preventDefault();
                     resultInput.value = '';
+                    operationInput.focus();
                 }
                 return;
             }
             if (value === '<') {
+                e.preventDefault();
                 moveCursor(value);
+                operationInput.focus();
                 return;
             }
             if (value === '>') {
+                e.preventDefault();
                 moveCursor(value);
+                operationInput.focus();
                 return;
             }
             if (isValidInput(value, operationInput)) {
                 e.preventDefault();
                 insertAtCursor(value, operationInput);
                 operationInput.focus();
-                return;
+            } else {
+                e.preventDefault();
+                operationInput.focus();
             }
         });
         calculatorButton.addEventListener('pointerup', () => {
             calculatorButton.classList.remove('key-active');
-            // operationInput.focus();
         });
         calculatorButton.addEventListener('pointerleave', () => {
             calculatorButton.classList.remove('key-active');
-            // operationInput.focus();
         });
     })
 
@@ -97,20 +109,23 @@ function loadButtons() {
         operationsContainer.appendChild(calculatorButton)
         const operationInput = document.getElementById('operation-input');
 
-        calculatorButton.addEventListener('pointerdown', () => {
+        calculatorButton.addEventListener('pointerdown', (e) => {
             calculatorButton.classList.add('key-active');
             const insert = isValidInput(value, operationInput);
             if (insert) {
+                e.preventDefault();
                 insertAtCursor(value, operationInput);
+                operationInput.focus();
+            } else {
+                e.preventDefault();
+                operationInput.focus();
             }
         });
         calculatorButton.addEventListener('pointerup', () => {
             calculatorButton.classList.remove('key-active');
-            operationInput.focus();
         });
         calculatorButton.addEventListener('pointerleave', () => {
             calculatorButton.classList.remove('key-active');
-            operationInput.focus();
         });
     })
 }
